@@ -1,0 +1,32 @@
+# Backend
+backend/appointments/target/
+backend/appointments/.mvn/
+backend/appointments/mvnw
+backend/appointments/mvnw.cmd
+*.class
+*.jar
+*.war
+*.ear
+ 
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/coverage/
+ 
+# IDE
+.idea/
+.vscode/
+*.iml
+ 
+# OS
+.DS_Store
+Thumbs.db
+ 
+# Secrets
+*.pem
+*.key
+application-local.properties
+ 
+# Logs
+*.log

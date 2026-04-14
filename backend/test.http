@@ -1,0 +1,47 @@
+### Health check
+GET http://localhost:8080/api/health
+
+### Create new user
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "Yulia",
+  "email": "yulia@test.ie",
+  "passwordHash": "123",
+  "role": "CITIZEN"
+}
+
+### Get all users
+GET http://localhost:8080/api/users
+
+### Post a new booking
+POST http://localhost:8080/api/appointments/book
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "serviceId": 1,
+  "slotId": 1
+}
+
+### Create a Gov.service
+POST http://localhost:8080/api/services
+Content-Type: application/json
+
+{
+  "serviceName": "NDLS Appointment",
+  "description": "Driver licence services"
+}
+
+### Get list of services
+GET http://localhost:8080/api/services
+
+###Create slot
+POST http://localhost:8080/slots
+Content-Type: application/json
+
+{
+  "startTime": "2026-03-05T10:00:00",
+  "endTime": "2026-03-05T11:00:00"
+}
