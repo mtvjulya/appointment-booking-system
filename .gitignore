@@ -18,15 +18,9 @@ frontend/coverage/
 .idea/
 .vscode/
 *.iml
- 
-# OS
-.DS_Store
-Thumbs.db
+
  
 # Secrets
 *.pem
 *.key
 application-local.properties
- 
-# Logs
-*.log
