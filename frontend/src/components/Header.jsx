@@ -8,7 +8,7 @@ console.log(user);
     <header className="header">
       <div className="container header-container">
         <Link to="https://www.gov.ie/" className="header-logo">
-          gov.ie
+          goveeeeee.ie
         </Link>
 
         <nav className="header-nav">
