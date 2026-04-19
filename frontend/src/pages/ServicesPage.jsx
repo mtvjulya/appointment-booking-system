@@ -24,10 +24,10 @@ function ServicesPage() {
     }
   };
 
-  if (loading) return <div className="page-content"><div className="container">Loading services...</div></div>;
+  if (loading) return <section className="page-content"><div className="container">Loading services...</div></section>;
 
   return (
-    <div className="page-content">
+    <section className="page-content">
       <div className="container">
         <h1>Book an Appointment</h1>
         <p className="subtitle">
@@ -66,7 +66,7 @@ function ServicesPage() {
           <p className="text-grey">No services available at the moment.</p>
         )}
       </div>
-    </div>
+    </section>
   );
 }
 

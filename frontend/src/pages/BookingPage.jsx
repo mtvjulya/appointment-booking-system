@@ -164,13 +164,13 @@ function BookingPage() {
     });
   };
 
-  if (loading) return <div className="page-content"><div className="container">Loading...</div></div>;
-  if (!service) return <div className="page-content"><div className="container"><p>Service not found.</p></div></div>;
+  if (loading) return <section className="page-content"><div className="container">Loading...</div></section>;
+  if (!service) return <section className="page-content"><div className="container"><p>Service not found.</p></div></section>;
 
   const stepLabels = ['Your details', 'Select centre', 'Choose a slot', 'Confirm'];
 
   return (
-    <div className="page-content">
+    <section className="page-content">
       <div className="container container-narrow">
 
         {/* Progress indicator */}
@@ -542,7 +542,7 @@ function BookingPage() {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 }
 

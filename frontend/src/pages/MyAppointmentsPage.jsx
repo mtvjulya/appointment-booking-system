@@ -30,10 +30,10 @@ function MyAppointmentsPage() {
     }
   };
 
-  if (loading) return <div className="page-content"><div className="container">Loading...</div></div>;
+  if (loading) return <section className="page-content"><div className="container">Loading...</div></section>;
 
   return (
-    <div className="page-content">
+    <section className="page-content">
       <div className="container">
         <h1>My Appointments</h1>
 
@@ -95,7 +95,7 @@ function MyAppointmentsPage() {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 }
 

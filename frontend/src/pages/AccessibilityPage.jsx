@@ -1,6 +1,6 @@
 function AccessibilityPage() {
   return (
-    <div className="page-content">
+    <section className="page-content">
       <div className="container container-narrow">
         <h1>Accessibility</h1>
         <p className="published-date">
@@ -85,7 +85,7 @@ function AccessibilityPage() {
         </div>
 
       </div>
-    </div>
+    </section>
   );
 }
 

@@ -5,7 +5,7 @@ function HomePage() {
   const { user } = useAuth();
 
   return (
-    <div className="page-content">
+    <section className="page-content">
       <div className="hero-banner">
         <div className="container">
           <h1 className="hero-title">Appointment Booking Service</h1>
@@ -35,7 +35,7 @@ function HomePage() {
 
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

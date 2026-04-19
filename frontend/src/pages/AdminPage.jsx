@@ -85,7 +85,7 @@ function AdminPage() {
   };
 
   return (
-    <div className="page-content">
+    <section className="page-content">
       <div className="container">
         <div className="admin-header">
           <h1>Admin Dashboard</h1>
@@ -200,7 +200,7 @@ function AdminPage() {
           />
         )}
       </div>
-    </div>
+    </section>
   );
 }
 

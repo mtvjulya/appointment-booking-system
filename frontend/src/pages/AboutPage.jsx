@@ -1,6 +1,6 @@
 function AboutPage() {
   return (
-    <div className="page-content">
+    <section className="page-content">
       <div className="container container-narrow">
         <h1>About the Appointment Booking System</h1>
         <p className="published-date">
@@ -58,7 +58,7 @@ function AboutPage() {
           system to demonstrate best practices in public service digital design.
         </p>
       </div>
-    </div>
+    </section>
   );
 }
 
