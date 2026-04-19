@@ -65,8 +65,8 @@ class AppointmentServiceTest {
 
         testSlot = new TimeSlot();
         testSlot.setAvailabilityStatus(SlotStatus.AVAILABLE);
-        testSlot.setStartTime(LocalDateTime.now().plusDays(1));
-        testSlot.setEndTime(LocalDateTime.now().plusDays(1).plusMinutes(30));
+        testSlot.setStartTime(LocalDateTime.now().plusDays(2));
+        testSlot.setEndTime(LocalDateTime.now().plusDays(2).plusMinutes(30));
 
         bookingRequest = new BookingRequest();
         bookingRequest.setUserId(1L);
@@ -84,6 +84,7 @@ class AppointmentServiceTest {
         when(serviceRepository.findById(1L)).thenReturn(Optional.of(testService));
         when(timeSlotRepository.findById(1L)).thenReturn(Optional.of(testSlot));
         when(centreRepository.findById(1L)).thenReturn(Optional.of(testCentre));
+        when(appointmentRepository.existsByUserUserIdAndServiceServiceIdAndStatusNot(1L, 1L, AppointmentStatus.CANCELLED)).thenReturn(false);
         when(appointmentRepository.save(any(Appointment.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         // When
@@ -105,6 +106,7 @@ class AppointmentServiceTest {
     void bookAppointment_SlotAlreadyBooked_ThrowsException() {
         // Given
         testSlot.setAvailabilityStatus(SlotStatus.BOOKED);
+        testSlot.setStartTime(LocalDateTime.now().plusDays(2));
         
         when(userRepository.findById(1L)).thenReturn(Optional.of(testUser));
         when(serviceRepository.findById(1L)).thenReturn(Optional.of(testService));
@@ -147,9 +149,11 @@ class AppointmentServiceTest {
         // Given
         TimeSlot oldSlot = new TimeSlot();
         oldSlot.setAvailabilityStatus(SlotStatus.BOOKED);
+        oldSlot.setStartTime(LocalDateTime.now().plusDays(2));
 
         TimeSlot newSlot = new TimeSlot();
         newSlot.setAvailabilityStatus(SlotStatus.AVAILABLE);
+        newSlot.setStartTime(LocalDateTime.now().plusDays(3));
 
         Appointment appointment = new Appointment();
         appointment.setStatus(AppointmentStatus.BOOKED);
@@ -180,11 +184,14 @@ class AppointmentServiceTest {
         // Given
         TimeSlot oldSlot = new TimeSlot();
         oldSlot.setAvailabilityStatus(SlotStatus.BOOKED);
+        oldSlot.setStartTime(LocalDateTime.now().plusDays(2));
 
         TimeSlot newSlot = new TimeSlot();
         newSlot.setAvailabilityStatus(SlotStatus.BOOKED);
+        newSlot.setStartTime(LocalDateTime.now().plusDays(3));
 
         Appointment appointment = new Appointment();
+        appointment.setStatus(AppointmentStatus.BOOKED);
         appointment.setTimeSlot(oldSlot);
 
         when(appointmentRepository.findById(1L)).thenReturn(Optional.of(appointment));

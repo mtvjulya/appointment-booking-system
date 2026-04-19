@@ -13,23 +13,23 @@ npm run build
 ## Running Tests
 npm test
 
- ### Core Application Files
+### Core Application Files
 
-- **`src/main.jsx`** - Entry point, renders App component
-- **`src/App.jsx`** - Main router configuration
-- **`src/index.css`** - Global styles following gov.ie design system
+`src/main.jsx` - Entry point, renders App component
+`src/App.jsx` - Main router configuration
+`src/index.css` - Global styles
 
 ### Authentication
 
-- **`src/context/AuthContext.jsx`** - Manages user authentication state using sessionStorage
+`src/context/AuthContext.jsx`- Manages user authentication state using sessionStorage
 
 ### API Integration
 
-- **`src/services/api.js`** - Axios instance configured for backend communication
+`src/services/api.js` - Axios instance configured for backend communication
 
 ## Environment Variables
 
-The frontend expects the backend API to be running at `http://localhost:8080` in `src/services/api.js`.
+The frontend expects the backend API to be running at `https://16.170.252.193/api` in `src/services/api.js`.
 
 ## Technologies Used
 - Node.js (v16 or higher)

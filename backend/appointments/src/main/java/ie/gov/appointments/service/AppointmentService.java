@@ -39,7 +39,6 @@ public class AppointmentService {
     }
 
     public Appointment bookAppointment(BookingRequest request) {
-        // TODO: add validation for booking date (should be at least 24h in advance)
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -49,8 +48,23 @@ public class AppointmentService {
         TimeSlot slot = timeSlotRepository.findById(request.getSlotId())
                 .orElseThrow(() -> new RuntimeException("Slot not found"));
 
+        if (slot.getStartTime().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("Cannot book a slot in the past");
+        }
+
+        if (slot.getStartTime().isBefore(LocalDateTime.now().plusHours(24))) {
+            throw new RuntimeException("Appointments must be booked at least 24 hours in advance");
+        }
+
         if (slot.getAvailabilityStatus() == SlotStatus.BOOKED) {
             throw new RuntimeException("Slot already booked");
+        }
+
+        boolean hasActiveAppointment = appointmentRepository
+                .existsByUserUserIdAndServiceServiceIdAndStatusNot(
+                        request.getUserId(), request.getServiceId(), AppointmentStatus.CANCELLED);
+        if (hasActiveAppointment) {
+            throw new RuntimeException("You already have an active appointment for this service");
         }
 
         Appointment appointment = new Appointment();
@@ -109,6 +123,11 @@ public class AppointmentService {
             throw new RuntimeException("Appointment is already cancelled");
         }
 
+        TimeSlot cancelSlot = appointment.getTimeSlot();
+        if (cancelSlot != null && cancelSlot.getStartTime().isBefore(LocalDateTime.now().plusHours(2))) {
+            throw new RuntimeException("Appointments cannot be cancelled less than 2 hours before the scheduled time");
+        }
+
         appointment.setStatus(AppointmentStatus.CANCELLED);
 
         TimeSlot slot = appointment.getTimeSlot();
@@ -130,7 +149,10 @@ public class AppointmentService {
     
     Appointment appointment = appointmentRepository.findById(appointmentId)
         .orElseThrow(() -> new RuntimeException("Appointment not found"));
-    
+
+    if (appointment.getStatus() == AppointmentStatus.CANCELLED) {
+        throw new RuntimeException("Cannot reschedule a cancelled appointment");
+    }
     
     TimeSlot oldSlot = appointment.getTimeSlot();
     
@@ -139,6 +161,10 @@ public class AppointmentService {
         .orElseThrow(() -> new RuntimeException("Time slot not found"));
     
    
+    if (newSlot.getStartTime().isBefore(LocalDateTime.now().plusHours(24))) {
+        throw new RuntimeException("Appointments must be rescheduled at least 24 hours in advance");
+    }
+
     if (newSlot.getAvailabilityStatus() != SlotStatus.AVAILABLE) {
         throw new RuntimeException("Time slot is not available");
     }
