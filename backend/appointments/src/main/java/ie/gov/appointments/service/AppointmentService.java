@@ -6,6 +6,7 @@ import ie.gov.appointments.repository.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import java.util.List;
 
@@ -48,11 +49,11 @@ public class AppointmentService {
         TimeSlot slot = timeSlotRepository.findById(request.getSlotId())
                 .orElseThrow(() -> new RuntimeException("Slot not found"));
 
-        if (slot.getStartTime().isBefore(LocalDateTime.now())) {
+        if (slot.getStartTime().isBefore(LocalDateTime.now(ZoneId.of("Europe/Dublin")))) {
             throw new RuntimeException("Cannot book a slot in the past");
         }
 
-        if (slot.getStartTime().isBefore(LocalDateTime.now().plusHours(24))) {
+        if (slot.getStartTime().isBefore(LocalDateTime.now(ZoneId.of("Europe/Dublin")).plusHours(24))) {
             throw new RuntimeException("Appointments must be booked at least 24 hours in advance");
         }
 
@@ -124,7 +125,7 @@ public class AppointmentService {
         }
 
         TimeSlot cancelSlot = appointment.getTimeSlot();
-        if (cancelSlot != null && cancelSlot.getStartTime().isBefore(LocalDateTime.now().plusHours(2))) {
+        if (cancelSlot != null && cancelSlot.getStartTime().isBefore(LocalDateTime.now(ZoneId.of("Europe/Dublin")).plusHours(2))) {
             throw new RuntimeException("Appointments cannot be cancelled less than 2 hours before the scheduled time");
         }
 
@@ -161,7 +162,7 @@ public class AppointmentService {
         .orElseThrow(() -> new RuntimeException("Time slot not found"));
     
    
-    if (newSlot.getStartTime().isBefore(LocalDateTime.now().plusHours(24))) {
+    if (newSlot.getStartTime().isBefore(LocalDateTime.now(ZoneId.of("Europe/Dublin")).plusHours(24))) {
         throw new RuntimeException("Appointments must be rescheduled at least 24 hours in advance");
     }
 
@@ -180,7 +181,7 @@ public class AppointmentService {
     
     appointment.setTimeSlot(newSlot);
     appointment.setStatus(AppointmentStatus.RESCHEDULED);
-    appointment.setUpdatedAt(LocalDateTime.now());
+    appointment.setUpdatedAt(LocalDateTime.now(ZoneId.of("Europe/Dublin")));
     
     Notification notification = new Notification();
     notification.setUser(appointment.getUser());

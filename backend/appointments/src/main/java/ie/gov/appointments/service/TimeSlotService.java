@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ie.gov.appointments.entity.SlotStatus;
 import java.util.List;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Service
 public class TimeSlotService {
@@ -29,7 +30,7 @@ public class TimeSlotService {
     }
     
     public List<TimeSlot> getAvailableByCentre(Long centreId) {
-        LocalDateTime cutoff = LocalDateTime.now().plusHours(24);
+        LocalDateTime cutoff = LocalDateTime.now(ZoneId.of("Europe/Dublin")).plusHours(24);
         return repository.findByCentreCentreIdAndAvailabilityStatusAndStartTimeAfter(centreId, SlotStatus.AVAILABLE, cutoff);
     }
 
