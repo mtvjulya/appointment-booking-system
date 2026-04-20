@@ -136,6 +136,7 @@ public class AppointmentService {
             slot.setAvailabilityStatus(SlotStatus.AVAILABLE);
             timeSlotRepository.save(slot);
         }
+        appointment.setTimeSlot(null);
 
         Appointment savedAppointment = appointmentRepository.save(appointment);
         
