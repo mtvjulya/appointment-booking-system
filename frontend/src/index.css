@@ -422,6 +422,10 @@ h3 {
    color: var(--gov-grey); 
 }
 
+.text-red {
+   color: var(--gov-error); 
+}
+
 .text-small {
    font-size: var(--gieds-font-size-200);
 }

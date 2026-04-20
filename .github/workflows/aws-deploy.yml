@@ -69,9 +69,10 @@ jobs:
         
         # Restart application on EC2
         ssh -i private_key.pem -o StrictHostKeyChecking=no ${USER}@${HOST} << 'EOF'
-          pkill -f appointments || true
+          sudo pkill -f 'java.*appointments' || true
+          sleep 2
           nohup java -jar ~/appointments-0.0.1-SNAPSHOT.jar --spring.config.location=/home/ec2-user/application.properties > ~/app.log 2>&1 &
-          sleep 5
+          sleep 10
           echo "Backend deployed successfully"
         EOF
         
