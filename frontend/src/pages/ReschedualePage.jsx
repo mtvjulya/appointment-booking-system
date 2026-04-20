@@ -120,7 +120,7 @@ function ReschedulePage() {
           <h2>Select New Date & Time</h2>
           
           {availableDates.length === 0 ? (
-            <p>No available slots for this centre at the moment.</p>
+            <p className="text-red">No available slots for this centre at the moment.</p>
           ) : (
             <>
               {/* Calendar grid (same as BookingPage) */}
