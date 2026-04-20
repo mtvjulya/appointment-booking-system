@@ -413,7 +413,7 @@ function BookingPage() {
             </button>
 
             {availableDates.length === 0 ? (
-              <p>No available slots for this centre at the moment.</p>
+              <p className="text-red">No available slots for this centre at the moment.</p>
             ) : (
               <>
                 {/* Calendar grid */}
