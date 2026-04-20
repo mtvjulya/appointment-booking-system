@@ -5,6 +5,7 @@ import ie.gov.appointments.repository.TimeSlotRepository;
 import org.springframework.stereotype.Service;
 import ie.gov.appointments.entity.SlotStatus;
 import java.util.List;
+import java.time.LocalDateTime;
 
 @Service
 public class TimeSlotService {
@@ -28,7 +29,8 @@ public class TimeSlotService {
     }
     
     public List<TimeSlot> getAvailableByCentre(Long centreId) {
-        return repository.findByCentreCentreIdAndAvailabilityStatus(centreId, SlotStatus.AVAILABLE);
+        LocalDateTime cutoff = LocalDateTime.now().plusHours(24);
+        return repository.findByCentreCentreIdAndAvailabilityStatusAndStartTimeAfter(centreId, SlotStatus.AVAILABLE, cutoff);
     }
 
     public TimeSlot createSlot(TimeSlot slot) {
