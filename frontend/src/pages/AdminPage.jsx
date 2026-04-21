@@ -104,7 +104,9 @@ function AdminPage() {
           <h2>All Slots & Appointments</h2>
           
           <div className="admin-filters">
+            <label htmlFor="search" className="sr-only">Search slots and appointments</label>
             <input
+              id="search"
               type="text"
               placeholder="Search by user, centre or service..."
               value={searchTerm}

@@ -196,13 +196,13 @@ function BookingPage() {
             </p>
 
             <div className="form-group">
-              <label>Full Name</label>
-              <input type="text" defaultValue={form.fullName} />
+              <label htmlFor="fullName">Full Name</label>
+              <input id="fullName" type="text" defaultValue={form.fullName} />
             </div>
 
             <div className="form-group">
-              <label>Email</label>
-              <input type="text" defaultValue={user.email} />
+              <label htmlFor="email">Email</label>
+              <input id="email" type="text" defaultValue={user.email} />
             </div>
 
             <div className="form-group">
