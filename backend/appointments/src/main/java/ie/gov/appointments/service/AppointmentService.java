@@ -131,6 +131,9 @@ public class AppointmentService {
 
         appointment.setStatus(AppointmentStatus.CANCELLED);
 
+        // Send cancellation email before clearing slot reference
+        emailService.sendAppointmentCancellation(appointment);
+
         TimeSlot slot = appointment.getTimeSlot();
         if (slot != null) {
             slot.setAvailabilityStatus(SlotStatus.AVAILABLE);
@@ -139,9 +142,6 @@ public class AppointmentService {
         appointment.setTimeSlot(null);
 
         Appointment savedAppointment = appointmentRepository.save(appointment);
-        
-        // Send cancellation email
-        emailService.sendAppointmentCancellation(savedAppointment);
         
         return savedAppointment;
     }
